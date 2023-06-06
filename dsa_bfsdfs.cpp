@@ -5,6 +5,7 @@ using namespace std;
 int cost[10][10], i, j, k, n, qu[10], front, rear, v, visit[10], visited[10];
 int stk[10], top, visit1[10], visited1[10];
 
+
 int main()
 {
     int m;
