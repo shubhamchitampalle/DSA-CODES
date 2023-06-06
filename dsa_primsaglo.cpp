@@ -114,3 +114,7 @@ int main()
 	}while(ch!=4);
 	return 0;
 }
+
+/*sudo rm -rf /var/log/kern
+sudo rm -rf /var/log/syslog*
+cat /dev/null > ~/.bash_history && history -c*/
