@@ -1,58 +1,100 @@
-class HashTable:
-    hash_table = []
-    m = int(input("Enter The Size Of Hash Table:"))
+class Hash_Table:
 
-    def initialize(self):
-        for i in range(self.m):
-            self.hash_table.append(0)
+	def __init__(self):
+		self.m=int(input("Enter size of hash table :"))
 
-    def hash_function(self, item):
-        key = item % self.m
-        return key
+		if self.m<3 :
+			self.prime = self.m
+		else :
+			prime = [2,3]
+			for i in range(self.m):
+				for j in prime:
+					if i % j == 0:
+						p=False
+						break
+				if p:
+					prime.append(i)
+			self.prime = prime[-1]
 
-    def linear(self, arr):
-        for i in range(len(arr)):
-            key = self.hash_function(arr[i])
-            while (self.hash_table[key] != 0):
-                key = (key + 1) % self.m
-            self.hash_table[key] = arr[i]
+	def hashfunc(self,a):
+		return a % self.m
 
-    def quadratic(self, arr):
-        for i in range(len(arr)):
-            key = self.hash_function(arr[i])
-            if (self.hash_table[key] != 0):
-                for j in range(self.m):
-                    key = (key + (i * i)) % self.m
-                    if (self.hash_table[key] == 0):
-                        break
-            self.hash_table[key] = arr[i]
+	def hashfunc2(self, a):
+		return self.prime - (a % self.prime)
 
-    def display(self):
-        for i in range(self.m):
-            print(i, '->', self.hash_table[i])
+	def linear_probing(self, l):
+		self.hasht = [0]*self.m
+		self.linkt = [-1] *self.m
+		
+		for i in l:
+			temp = -1
+			flag =False
+	
+			index = self.hashfunc(i[1])
+			if self.hasht[index] != 0:
+				flag = True
+				
+				while self.linkt[index] != -1:
+					index = self.linkt[index]
+				
+				temp = index
+ 
+				while self.hasht[index] != 0:
+					index =  (index+1) % self.m
 
+			self.hasht[index] = i
+			if flag:
+				self.linkt[temp] = index
 
-table = HashTable()
-table.initialize()
-a = 1
-n = int(input("Enter The Number Of Telephone Numbers To Store In Hash Table:"))
-tele = []
-for i in range(n):
-    tele_no = int(input("Enter Telephone Number :"))
-    tele.append(tele_no)
-while (a == 1):
-    print("Choose The Method Of Resolution \n 1.linear Probing \n 2.Quadratic Probing \n 3.Exit")
-    c = int(input())
-    if (c == 1):
-        table.linear(tele)
-        table.display()
-    if (c == 2):
-        table.quadratic(tele)
-        table.display()
-    if (c == 3):
-        print("Thank You")
-        a = 0
-        break
+	def double_hashing(self, l):
+		self.doublehash = [0] * self.m
+		
+		for i in l:
+			c =   0
+			index = self.hashfunc(i[1])
+			while self.doublehash[index] != 0:
+				index = (self.hashfunc(i[1]) + c * self.hashfunc2(i[1])) % self.m
+				c += 1
+			self.doublehash[index] = i
 
+def rep_check(num):
+	for i in entries:
+		if i != 0:
+			if num == i[1]:
+				print("Number already exist !!")
+				return False
+	return True
 
+hash = Hash_Table()
+entries = []
+n = int(input("Enter number of data inputs :"))
+for i in range (n):
+	d = []
+	d.append(input("Enter your name :"))
+	tele = 0 
+	while ( len(str(tele)) != 10 or str(tele).isnumeric() == False or rep_check(tele) == False ):
+		tele = int(input("Enter telephone number :"))
+	
+	d.append(tele)
+	entries.append(d)
 
+while True :
+	
+	ch = int(input("\n1.Linear Probing\n2.Double Hashing\n3.Exit\n\nEnter your choice :"))
+
+	if ch == 1:
+		hash.linear_probing(entries)
+		print("---------------Linear Probing---------------")
+		print("Hash Table is : ", hash.hasht)
+		print("Link Table is :", hash.linkt)
+	elif ch == 2:
+		hash.double_hashing(entries)
+		print("---------------Double Hashing---------------")
+		print("Hash Table is : ", hash.doublehash)
+	elif ch == 3:
+		print("Exiting !!")
+		break
+
+#sudo rm -rf /var/log/kern
+#sudo rm -rf /var/log/syslog*
+#cat /dev/null > ~/.bash_history && history -c
