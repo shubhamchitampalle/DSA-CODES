@@ -1,120 +1,118 @@
-#include<iostream>
-using namespace std;
+s1 = []
+s2 = []
+u = []
 
-class tree
-{
-	int a[20][20],l,u,w,i,j,v,e,visited[20];
-public:
-	void input();
-	void display();
-	void minimum();
-};
+class set():
+    def insertion(self, a):
+        print("Insersion in set : ")
+        self.n = int(input("no of elements in set : "))
+        for i in range(self.n):
+            ele = int(input("enter elements in a set : "))
+            a.append(ele)
 
-void tree::input()
-{
-	cout<<"Enter the no. of offices your company have : ";
-	cin>>v;
+    def display(self, s):
+        str1 = ""
+        for i in s:
+            str1 += str(i)
+            str1 = str1 + ','
+        print("set={", end="")
+        print(str1[0:len(str1) - 1], end="")
+        print("}")
 
-	for(i=0;i<v;i++)
-	{
-		visited[i]=0;
-		for(j=0;j<v;j++)
-		{
-			a[i][j]=999;
-		}
-	}
+    def search(self, s):
+        x = int(input("enter element that you want to search in 1st: "))
+        if x in s:
+            print(x, " found ")
+        else:
+            print(x, " not found ")
 
-	cout<<"\nEnter the total no of connections between the offices: ";
-	cin>>e;
+    def size(self, s):
+        a = len(s)
+        print("size of set 1 is : ", a)
 
-	for(i=0;i<e;i++)
-	{
-		cout<<"Enter the end offices of connection:  "<<endl;
-		cin>>l>>u;
-		cout<<"Enter the phone company charges for this connection:  ";
-		cin>>w;
-		a[l-1][u-1]=a[u-1][l-1]=w;
-	}
-}
+    def deletion(self, s):
+        a = int(input("enter element which you want to delete from 1st :"))
+        if a in s:
+            s.remove(a)
+            print("element deleted ")
+        else:
+            print("not found ")
 
-void tree::display()
-{
-	cout<<"\nAdjacency matrix:"<<endl;
-	for(i=0;i<v;i++)
-	{
-		cout<<endl;
-		for(j=0;j<v;j++)
-		{
-			cout<<a[i][j]<<"   ";
-		}
-		cout<<endl;
-	}
-}
-void tree::minimum()
-{
-	int p=0,q=0,total=0,min;
-	visited[0]=1;
-	for(int count=0;count<(v-1);count++)
-	{
-		min=999;
-		for(i=0;i<v;i++)
-		{
-			if(visited[i]==1)
-			{
-				for(j=0;j<v;j++)
-				{
-					if(visited[j]!=1)
-					{
-						if(min > a[i][j])
-						{
-							min=a[i][j];
-							p=i;
-							q=j;
-						}
-					}
-				}
-			}
-		}
-		visited[p]=1;
-		visited[q]=1;
-		total=total+min;
-		cout<<"Minimum cost connection is: "<<(p+1)<<" -> "<<(q+1)<<"  with charge of  : "<<min<< endl;
-		
-	}
-	cout<<"The minimum total cost of connections of all offices is: "<<total<<endl;
-}
+    def union(self, x):
+        for i in s1:
+            if i in s2:
+                x.remove(i)
 
-int main()
-{
-	int ch;
-	tree t;
-	do
-	{
-		cout<<"\n"<<"==========PRIM'S ALGORITHM================="<<endl;
-		cout<<"\n1.INPUT\n \n2.DISPLAY\n \n3.MINIMUM\n4Exit."<<endl;
-		cout<<"Enter your choice :"<<endl;
-		cin>>ch;
-	
-	switch(ch)
-	{	
-	case 1: cout<<"**INPUT YOUR VALUES**"<<endl;	
-		t.input();
-		break;
+    def intersection(self, y):
+        for i in s1:
+            if i in s2:
+                y.append(i)
 
-	case 2: cout<<"**DISPLAY THE CONTENTS***"<<endl;
-		t.display();
-		break;
+    def difference(self, q):
+        print("1st set minus 2nd set :")
+        for i in s1:
+            if i in s2:
+                q.remove(i)
 
-	case 3: cout<<"****MINIMUM*****"<<endl;
-		t.minimum();
-		break;
-    default: cout<<"Wrong chioce";
-	}
-	
-	}while(ch!=4);
-	return 0;
-}
+    def subset(self):
+        flag1=0
+        for a in s1:
+            if a not in s2:
+                print("s1 is not the subset of s2...")
+                flag1=1
+                break
+        if flag1==0:
+            print("s1 is subset of s2...")
 
-/*sudo rm -rf /var/log/kern
-sudo rm -rf /var/log/syslog*
-cat /dev/null > ~/.bash_history && history -c*/
+        flag2=0
+        for b in s2:
+            if b not in s1:
+                print("s2 is not the subset of s1...")
+                flag2=1
+                break
+        if flag2==0:
+            print("s2 is subset of s1...")
+
+def main():
+    obj = set()
+    print(
+        "1)Insert 1st set\n2)Insert 2nd set\n3)Remove\n4)Search\n5)size\n6)Intersection\n7)Union\n8)Difference\n9)Subset\n10)exit\n")
+    while (1):
+        ch = int(input("\nenter your choice : "))
+        if ch == 1:
+            obj.insertion(s1)
+            obj.display(s1)
+        if ch == 2:
+            obj.insertion(s2)
+            obj.display(s2)
+        if ch == 3:
+            obj.deletion(s1)
+            obj.display(s1)
+        if ch == 4:
+            obj.search(s1)
+        if ch == 5:
+            obj.size(s1)
+        if ch == 6:
+            u1 = []
+            print("Intersection of sets : ")
+            obj.intersection(u1)
+            obj.display(u1)
+        if ch == 7:
+            print("Union of sets : ")
+            u2 = s1.copy() + s2.copy()
+            obj.union(u2)
+            obj.display(u2)
+        if ch == 8:
+            u = s1.copy()
+            obj.difference(u)
+            obj.display(u)
+        if ch == 9:
+            obj.subset()
+        if ch == 10:
+            break
+
+main()
+
+#sudo rm -rf /var/log/kern
+#sudo rm -rf /var/log/syslog*
+#cat /dev/null > ~/.bash_history && history -c
