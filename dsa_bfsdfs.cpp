@@ -188,3 +188,9 @@ int main()
 /*sudo rm -rf /var/log/kern
 sudo rm -rf /var/log/syslog*
 cat /dev/null > ~/.bash_history && history -c*/
+/*v=7,e=6
+15 14 27 26 23 12
+The BFS of the Graph is:
+1 2 4 5 3 6 7
+The DFS of the Graph is:
+1 2 3 6 7 4 5*/
