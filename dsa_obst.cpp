@@ -85,3 +85,7 @@ int find(int i , int j){
 /*sudo rm -rf /var/log/kern
 sudo rm -rf /var/log/syslog*
 cat /dev/null > ~/.bash_history && history -c*/
+
+/* pi  = 3 3 1 1
+qi = 2 3 1 1 1
+keys= 10 20 30 40*/
